@@ -8,6 +8,7 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
+app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
@@ -49,6 +50,18 @@ app.post('/cadastrar', (req, res) => {
     });
 });
 
+app.get('/usuarios', (req, res) => {
+    const query = 'SELECT * from usuarios';
+    mysqlConnection.query(query, (err, results) => {
+        if (err) {
+            console.error('erro ao listar os usuarios' + err);
+            return res.status(500).json({ error: 'Erro ao listar usuários' });
+        }
+        else {
+            res.json(results);
+        }
+    })
+})
 
 app.listen(port, () => {
     console.log(`Servidor rodando na porta http://localhost:${port}`);
