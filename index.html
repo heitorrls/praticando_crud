@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <h1>Cadastro de pessoas</h1>
 
     <form action="/cadastrar" method="POST">
+        <input type="hidden" id="id-usuario">
+        
         <input type="text" name="nome" id="nome" placeholder="Digite o nome">
         <input type="text" name="sobrenome" id="sobrenome" placeholder="Digite o sobrenome">
         <input type="text" name="email" id="email" placeholder="Digite o email">
@@ -21,7 +24,7 @@
                 <th>Nome</th>
                 <th>Sobrenome</th>
                 <th>Email</th>
-            </tr>
+                <th>Ações</th> </tr>
         </thead>
         <tbody id="tabela-corpo">
         </tbody>
