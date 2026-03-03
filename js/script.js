@@ -17,7 +17,7 @@ async function carregarUsuarios() {
                             <td>${usuario.sobrenome}</td>
                             <td>${usuario.email}</td>
                             <td> 
-                                <button onclick="editarUsuario(${usuario.id})">Editar</button>
+                                <button onclick="editarUsuario(${usuario.id}, '${usuario.nome}', '${usuario.sobrenome}', '${usuario.email}')">Editar</button>
                             </td>
                             <td>
                                 <button onclick="deletarUsuario(${usuario.id})">Deletar</button>
@@ -36,6 +36,98 @@ async function carregarUsuarios() {
 
 window.onload = carregarUsuarios;
 
+function habilitaEdicao(id, nomeAtual, sobrenomeAtual, emailAtual) {
+
+    const tr = document.getElementById(`linha-${id}`);
+
+    tr.innerHTML = `
+        <td><input type="text" id="edit-nome-${id}" value="${nomeAtual}"></td>
+        <td><input type="text" id="edit-sobrenome-${id}" value="${sobrenomeAtual}"></td>
+        <td><input type="text" id="edit-email-${id}" value="${emailAtual}"></td>
+        <td> 
+            <button onclick="salvarEdicao(${id})">Salvar</button>
+            <button onclick="carregarUsuarios()">Cancelar</button>
+        </td>
+        <td>
+            <button disabled>Deletar</button>
+        </td>`;
+}
+
+async function salvarEdicao(id){
+    const novoNome = document.getElementById(`edit-nome-${id}`).value;
+    const novoSobrenome = document.getElementById(`edit-sobrenome-${id}`).value;
+    const novoEmail = document.getElementById(`edit-email-${id}`).value;
+
+    try {
+        const resposta = await fetch(`/api/usuarios/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                nome: novoNome, sobrenome: novoSobrenome, email: novoEmail 
+            })
+
+        })
+
+        if (resposta.ok) {
+            alert('Usuário atualizado com sucesso!');
+            carregarUsuarios();
+        } else {
+            alert('erro ao atualizar o usuario no banco de dados');
+        } 
+    }
+        catch (erro) {
+            console.error('Erro na comunicação: ', erro);
+            alert('Erro de comunicação com o servidor.');
+        }
+}
+
+// sem async pq nao precisa esperar resposta do backend, apenas redirecionar para a página de edição
+function editarUsuario(id, nomeAtual, sobrenomeAtual, emailAtual) {
+    document.getElementById('id-usuario').value = id;
+    document.getElementById('nome').value = nomeAtual;
+    document.getElementById('sobrenome').value = sobrenomeAtual;
+    document.getElementById('email').value = emailAtual;
+    document.getElementById('btn-submit').value = "Atualizar Usuário";
+
+}
+
+document.getElementById('form-usuario').addEventListener('submit', async function (event){
+    const id = document.getElementById('id-usuario').value;
+
+    if (id) {
+        event.preventDefault();
+
+        const nome = document.getElementById('nome').value;
+        const sobrenome = document.getElementById('sobrenome').value;
+        const email = document.getElementById('email').value;
+
+        try {
+            const resposta = await fetch(`/api/usuarios/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nome, sobrenome, email })
+            });
+        
+        if (resposta.ok) {
+            alert('Usuário atualizado com sucesso paizao!');
+            document.getElementById('id-usuario').value = '';
+            this.reset();
+            document.getElementById('btn-submit').value = "Cadastrar";
+
+            carregarUsuarios();
+        }    else {
+            alert('Erro ao atualizar o usuário no banco de dados.');    
+        }
+
+        } catch (erro) {
+            console.error('Erro na comunicação: ', erro);
+        }
+    }
+})
 async function deletarUsuario(id) {
     const confirmacao = confirm("Tem certeza que deseja excluir este usuário?");
     
@@ -59,11 +151,3 @@ async function deletarUsuario(id) {
         }
     }
 }
-
-// sem async pq nao precisa esperar resposta do backend, apenas redirecionar para a página de edição
-function editarUsuario(id) {
-    document.getElementById('id-usuario').value = id;
-    document.getElementById('nome').value = nomeAtual;
-    document.getElementById('sobrenome').value = sobrenomeAtual;
-    document.getElementById('email').value = emailAtual;
-document.getElementById('btn-submit').value = "Atualizar Usuário";}

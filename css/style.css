@@ -4,6 +4,13 @@ body {
 
 }
 
+input {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 30px;
+}
 
 table {
     width: 100%;
@@ -11,5 +18,18 @@ table {
     scroll-behavior: smooth;
     justify-content: center;
     align-items: center;
+    margin-bottom: 30px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+#tabela-corpo {
     
+}
+
+tabela-corpo:hover {
+    background-color: #f2f2f2;
 }

@@ -58,7 +58,7 @@ router.delete('/api/usuarios/:id', (req, res) => {
     });
 });
 
-router.alter('/api/usuarios/:id', (req, res) => {
+router.post('/api/usuarios/:id', (req, res) => {
     const { id } = req.params;
     const query = 'UPDATE usuarios SET nome = ?. sobrenome = ?, email = ?' + 'WHERE id = ?';
 
@@ -70,4 +70,7 @@ router.alter('/api/usuarios/:id', (req, res) => {
         res.json({ message: 'Utilizador atualizado com sucesso!' });
     });
 });
+
+
+
 module.exports = router;
