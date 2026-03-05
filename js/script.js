@@ -17,10 +17,10 @@ async function carregarUsuarios() {
                             <td>${usuario.sobrenome}</td>
                             <td>${usuario.email}</td>
                             <td> 
-                                <button onclick="editarUsuario(${usuario.id}, '${usuario.nome}', '${usuario.sobrenome}', '${usuario.email}')">Editar</button>
+                                <button id="btn-editar" onclick="editarUsuario(${usuario.id}, '${usuario.nome}', '${usuario.sobrenome}', '${usuario.email}')">Editar</button>
                             </td>
                             <td>
-                                <button onclick="deletarUsuario(${usuario.id})">Deletar</button>
+                                <button id="btn-deletar" onclick="deletarUsuario(${usuario.id})">Deletar</button>
                             </td>`;
                             
             tabelaCorpo.appendChild(tr);
