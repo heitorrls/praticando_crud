@@ -1,4 +1,4 @@
-# Sistema de Gestão de Utilizadores (CRUD)
+# Sistema de Gestão de Usuários (CRUD)
 
 Este projeto é uma aplicação web *Full-Stack* desenvolvida com o objetivo de praticar e consolidar os conceitos de um sistema **CRUD** (Criar, Ler, Atualizar e Eliminar). A aplicação permite gerir uma lista de utilizadores, interagindo com uma base de dados relacional e atualizando a interface gráfica de forma dinâmica e moderna através do *browser*.
 
