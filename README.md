@@ -32,7 +32,7 @@ Siga os passos abaixo para correr o projeto localmente:
 
 **1. Clone o repositório:**
 \`\`\`bash
-git clone https://github.com/o-seu-usuario/nome-do-repositorio.git
+git clone https://github.com/heitorrls/CRUD.git
 cd nome-do-repositorio
 \`\`\`
 
