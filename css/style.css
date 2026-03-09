@@ -37,24 +37,53 @@ tr:hover{
     background-color: rgb(228, 228, 228);
 }
 
-#btn-editar {
+.btn-editar {
     padding: 5px 10px;
     background-color: #fcde33;
     border-radius: 5px;
     border: none;
 }
 
-#btn-editar:hover {
+.btn-editar:hover {
     background-color: #a18c14;
 }
 
-#btn-deletar {
+.btn-deletar {
     padding: 5px 10px;
     background-color: #ff4d4d;
     border-radius: 5px;
     border: none;
+    color: white;
 }
 
-#btn-deletar:hover {
+.btn-deletar:hover {
     background-color: #911919;
+}
+
+#btn-salvar {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#btn-cancelar {
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-cadastrar {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-cadastrar:hover {
+    background-color: #2f6431;
 }

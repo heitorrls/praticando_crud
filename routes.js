@@ -1,14 +1,14 @@
 const express = require('express');
-const router = express.Router(); // Usamos o Router em vez de instanciar o app
+const router = express.Router(); 
 const path = require('path');
-const mysqlConnection = require('./db'); // Importamos a ligação à base de dados
+const mysqlConnection = require('./db'); 
 
 // 1. Rota para mostrar o formulário
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// 2. Rota para listar utilizadores (HTML)
+// Rota para listar os usuarios no html 
 router.get('/usuarios', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -58,9 +58,10 @@ router.delete('/api/usuarios/:id', (req, res) => {
     });
 });
 
-router.post('/api/usuarios/:id', (req, res) => {
+router.put('/api/usuarios/:id', (req, res) => {
     const { id } = req.params;
-    const query = 'UPDATE usuarios SET nome = ?. sobrenome = ?, email = ?' + 'WHERE id = ?';
+    const { nome, sobrenome, email } = req.body;
+    const query = 'UPDATE usuarios SET nome = ?, sobrenome = ?, email = ? WHERE id = ?';
 
     mysqlConnection.query(query, [nome, sobrenome, email, id], (err, resultados) => {
         if (err) {

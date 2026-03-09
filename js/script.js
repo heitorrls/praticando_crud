@@ -11,18 +11,37 @@ async function carregarUsuarios() {
 
         usuarios.forEach(usuario => {
             const tr = document.createElement('tr');
+            tr.id = `linha-${usuario.id}`;
 
-            tr.innerHTML = `
-                            <td>${usuario.nome}</td>
-                            <td>${usuario.sobrenome}</td>
-                            <td>${usuario.email}</td>
-                            <td> 
-                                <button id="btn-editar" onclick="editarUsuario(${usuario.id}, '${usuario.nome}', '${usuario.sobrenome}', '${usuario.email}')">Editar</button>
-                            </td>
-                            <td>
-                                <button id="btn-deletar" onclick="deletarUsuario(${usuario.id})">Deletar</button>
-                            </td>`;
-                            
+            const tdNome = document.createElement('td');
+            tdNome.textContent = usuario.nome;
+
+            const tdSobrenome = document.createElement('td');
+            tdSobrenome.textContent = usuario.sobrenome;
+
+            const tdEmail = document.createElement('td');
+            tdEmail.textContent = usuario.email;
+
+            const tdAcoes = document.createElement('td');
+            const btnEditar = document.createElement('button');
+            btnEditar.className = 'btn-editar';
+            btnEditar.textContent = 'Editar';
+            btnEditar.addEventListener('click', () => habilitaEdicao(usuario.id, usuario.nome, usuario.sobrenome, usuario.email));
+            tdAcoes.appendChild(btnEditar);
+
+            const tdDeletar = document.createElement('td');
+            const btnDeletar = document.createElement('button');
+            btnDeletar.className = 'btn-deletar';
+            btnDeletar.textContent = 'Deletar';
+            btnDeletar.addEventListener('click', () => deletarUsuario(usuario.id));
+            tdDeletar.appendChild(btnDeletar);
+
+            tr.appendChild(tdNome);
+            tr.appendChild(tdSobrenome);
+            tr.appendChild(tdEmail);
+            tr.appendChild(tdAcoes);
+            tr.appendChild(tdDeletar);
+
             tabelaCorpo.appendChild(tr);
         });
 
@@ -45,8 +64,8 @@ function habilitaEdicao(id, nomeAtual, sobrenomeAtual, emailAtual) {
         <td><input type="text" id="edit-sobrenome-${id}" value="${sobrenomeAtual}"></td>
         <td><input type="text" id="edit-email-${id}" value="${emailAtual}"></td>
         <td> 
-            <button onclick="salvarEdicao(${id})">Salvar</button>
-            <button onclick="carregarUsuarios()">Cancelar</button>
+            <button id="btn-salvar" onclick="salvarEdicao(${id})">Salvar</button>
+            <button id="btn-cancelar" onclick="carregarUsuarios()">Cancelar</button>
         </td>
         <td>
             <button disabled>Deletar</button>
