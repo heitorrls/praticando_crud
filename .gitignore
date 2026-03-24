@@ -1,1 +1,14 @@
+# Dependências do Node
 node_modules/
+
+# Arquivos de Segurança e Configuração Local
+.env
+
+# Logs de Erro do NPM
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos de Sistema Operacional (evita commitar lixo do Windows/Mac)
+.DS_Store
+Thumbs.db

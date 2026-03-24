@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');   
 
-// Importamos as rotas que criámos no outro ficheiro
 const rotas = require('./routes'); 
 
 const app = express();
